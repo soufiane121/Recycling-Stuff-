@@ -1,23 +1,26 @@
 import React from 'react'
 import {View, KeyboardAvoidingView, Text, StyleSheet, TextInput, TouchableOpacity} from "react-native"
 import {connect} from 'react-redux'
+import DismissKeyboardView from '../Components/DismissKeyboardView'
 
 
 const Login =(props)=>{
 
 return(
+    <DismissKeyboardView>
     <KeyboardAvoidingView behavior='padding' keyboardVerticalOffset="8" style={styles.all}>
+        <Text style={styles.titre}>Log In</Text>
         <TextInput style={styles.inpt} autoCapitalize = 'none' placeholder="User name" value={props.user_name} onChange={props.handleUserName}/>
         <TextInput style={styles.inpt} autoCapitalize = 'none' secureTextEntry placeholder="Password" value={props.password} onChange={props.handlePass}/>
         <TouchableOpacity style={styles.btn} onPress={props.handlLogIn}>
             <Text style={styles.text}>Log in</Text>
         </TouchableOpacity>
-        <Text>You Don't have an account</Text>
+        <Text>You Don't have an account?</Text>
         <TouchableOpacity onPress={props.handleDisplay}>
-            <Text>Sign up</Text>
+            <Text style={styles.sign}>Sign up</Text>
         </TouchableOpacity>
     </KeyboardAvoidingView>
-        
+    </DismissKeyboardView>
 )
 }
  const styles = StyleSheet.create({
@@ -25,7 +28,7 @@ return(
          flex: 1,
          justifyContent: 'center',
          alignItems: 'center',
-             },
+    },
     inpt:{
         borderBottomWidth: 1,
         borderBottomColor: 'grey',
@@ -42,6 +45,13 @@ return(
     text:{
         alignSelf: 'center',
         marginTop: 4,
+    },
+    titre:{
+        fontSize: 40,
+        fontWeight: '600',
+    },
+    sign:{
+        color: '#0c7b93'
     }
  })
 

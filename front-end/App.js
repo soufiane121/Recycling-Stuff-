@@ -1,10 +1,12 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import store from './Redux/store'
 import {Provider} from 'react-redux'
-import { StyleSheet, Text, View} from 'react-native';
+import { StyleSheet, View} from 'react-native';
 import LogSignParent from './Auth/LogSignParent'
 
-export default function App() {
+ const App= () =>{
+
+  
   return (
     <Provider store={store}>
     <View style={styles.container}>
@@ -22,3 +24,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+
+export default App;
