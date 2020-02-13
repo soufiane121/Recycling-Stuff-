@@ -19,8 +19,5 @@ class ApplicationController < ActionController::API
     def session_user
         User.find_by(id: request.headers["Authorization"].to_i)
     end
-
-    def logged_in?
-        !!session_user
-    end
+    
 end

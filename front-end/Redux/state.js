@@ -4,6 +4,7 @@ const defaultState ={
  user_name: null,
  password: null,
  currentUser: null,
+ currentUserId: null,
  loginDisplay: false,
 }
 export default defaultState;
