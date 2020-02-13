@@ -1,7 +1,7 @@
 import React from 'react';
 import store from './Redux/store'
 import {Provider} from 'react-redux'
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View} from 'react-native';
 import LogSignParent from './Auth/LogSignParent'
 
 export default function App() {
