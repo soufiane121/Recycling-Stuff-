@@ -9,11 +9,12 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import { DrawerActions } from '@react-navigation/native'
 import { Ionicons } from '@expo/vector-icons';
 
-
 import LogSignParent from './Auth/LogSignParent'
 import First from './Components/First'
 import Profile from './Components/Profile';
 import Setting from './Components/Setting';
+import LogOut from './Auth/LogOut';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator()
@@ -33,6 +34,11 @@ const Drawer = createDrawerNavigator()
 const FullStack=({navigation})=> {
   return (
   <Stack.Navigator>
+      <Stack.Screen  screenOptions={{
+        headerShown: false
+      }} name="Athu" component={LogSignParent} 
+      options={{ title: 'Registration' }}
+      />
       <Stack.Screen name="Home" children={DrawerComp} 
           options={({ navigation }) => ({ 
             headerLeft: () => (
@@ -44,7 +50,6 @@ const FullStack=({navigation})=> {
                 ),
           })}
       />  
-      <Stack.Screen name="Athu" component={LogSignParent} />
   </Stack.Navigator>
   )
 }
@@ -52,8 +57,13 @@ const FullStack=({navigation})=> {
 const DrawerComp=(props)=>{
   return(
   <Drawer.Navigator>
-    <Drawer.Screen  name='profile' component={Profile}/>
-    <Drawer.Screen  name='setting' component={Setting}/>
+    <Drawer.Screen name='profile' component={Profile}/>
+    <Drawer.Screen name='setting' component={Setting}/>
+    <Drawer.Screen name="logout" component={LogOut}
+    options={
+      <Button onPress={() => console.log(props)   }   />
+    }
+    />
   </Drawer.Navigator>
   )
 }
