@@ -6,17 +6,13 @@ import DismissKeyboardView from '../Components/DismissKeyboardView'
 
 const SignUp =(props)=>{
     
-    const handledismis=()=>{
-        Keyboard.dismiss()
-    }
-    
 return(
     <DismissKeyboardView>
     <KeyboardAvoidingView behavior='padding' keyboardVerticalOffset="3" style={styles.cont} >
         <Text style={styles.titre}>Register</Text>
         <TextInput style={styles.inpt} autoCapitalize = 'none' placeholder="First Name" value={props.first_name} onChange={props.handleFirstName}/>
         <TextInput style={styles.inpt} autoCapitalize = 'none' placeholder="Last Name" value={props.last_name} onChange={props.handleLastName}/>
-        <TextInput style={styles.inpt}  autoCapitalize = 'none'placeholder="User Name" value={props.user_name} onChange={props.handleUserName}/>
+        <TextInput style={styles.inpt} autoCapitalize = 'none' placeholder="User Name" value={props.user_name} onChange={props.handleUserName}/>
         <TextInput style={styles.inpt} autoCapitalize = 'none' secureTextEntry placeholder="password" value={props.password} onChange={props.handlePass}/>
         <TouchableOpacity style={styles.btn} onPress={props.handleSubmit}>
           <Text style={styles.text}>Sign Up</Text>
@@ -55,7 +51,6 @@ const styles= StyleSheet.create({
     },
     texting:{
         flexDirection: 'row',
-        // flex: 1
     },
     titre: {
         fontSize: 30,

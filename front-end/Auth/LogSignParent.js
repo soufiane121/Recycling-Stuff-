@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import {View, Text, StyleSheet, AsyncStorage, Button} from 'react-native'
-import { Video } from 'expo-av';
+// import { Video } from 'expo-av';
 import {connect} from 'react-redux'
 import Login from './Login';
 import SignUp from './SignUp';
@@ -8,7 +8,7 @@ import URL from './Url'
 
 
 const LogSignParent =(props)=>{
-
+  
 const handleSignUp=()=>{
  fetch(`${URL}/users`, {
     method: 'POST',
@@ -28,6 +28,7 @@ const handleSignUp=()=>{
         props.handleCurrentUser(data)
         props.handleCurrentUserId(data.user.id)
         saveDataToPhone(data.user.id)
+        props.navigation.replace("Home")
     })
     .catch(function(error) {
         alert("Something went wrong");
@@ -55,6 +56,8 @@ const handlLogIn=()=>{
         props.handleCurrentUser(data)
         props.handleCurrentUserId(data.user.id)
         saveDataToPhone(data.user.id)
+        props.navigation.replace("Home")
+
       }else {
           alert(data.errors)
       }
@@ -68,11 +71,15 @@ const handlLogIn=()=>{
 
 useEffect(()=>{
   fetchAutoLogin()
+  props.navigation.replace("Home")
+
 },[props.handleCurrentUserId])
 
 const fetchAutoLogin = async () => {
   try {
      value = await AsyncStorage.getItem('user_id');
+     console.log('value of localstorage', value);
+     
     if (value !== null) {
       fetch(`${URL}/autologin`,{
         headers: {
@@ -113,7 +120,8 @@ showData = async () => {
   };
 
     return(
-        <View>
+      
+        <View style={styles.container}>
             { props.loginDisplay !== true 
             ?
             <Login handlLogIn={handlLogIn}/>
@@ -121,6 +129,7 @@ showData = async () => {
             <SignUp handleSubmit={handleSignUp}/>
             }
         </View>
+        
     )
 }
 
@@ -132,7 +141,13 @@ const styles= StyleSheet.create({
         alignItems: "stretch",
         bottom: 0,
         right: 0
-    }
+    },
+    container: {
+      flex: 1,
+      backgroundColor: '#fff',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
 })
 
 const mstp=(state)=>{
