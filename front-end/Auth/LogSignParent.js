@@ -51,7 +51,6 @@ const handlLogIn=()=>{
     })
   .then(resp=> resp.json())
   .then(data=> {
-      console.log("data after log in", data.hasOwnProperty("errors"));
       if (!data.hasOwnProperty("errors")) {
         props.handleCurrentUser(data)
         props.handleCurrentUserId(data.user.id)
@@ -71,7 +70,6 @@ const handlLogIn=()=>{
 
 useEffect(()=>{
   fetchAutoLogin()
-  // props.navigation.replace("Home")
 },[props.handleCurrentUserId])
 
 
@@ -94,7 +92,6 @@ const fetchAutoLogin = async () => {
         props.handleCurrentUserId(data.user.id)
       })
     props.navigation.replace("Home")
-
     }
   } catch (error) {
     alert("dont know yet")

@@ -2,11 +2,13 @@ import React from 'react'
 import store from './Redux/store'
 import {Provider} from 'react-redux'
 
-import { StyleSheet, Button, Platform} from 'react-native';
+import { StyleSheet, Button, Platform, View, Text, } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { DrawerActions } from '@react-navigation/native'
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+
 import { Ionicons } from '@expo/vector-icons';
 
 import LogSignParent from './Auth/LogSignParent'
@@ -18,6 +20,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator()
+const BottomTaps = createBottomTabNavigator()
 
  const App= () => {
 
@@ -31,39 +34,44 @@ const Drawer = createDrawerNavigator()
     )
   }
 
+  const MenuButton = (props) => (
+    <View>
+      <TouchableOpacity onPress={() => props.navigation.dispatch(DrawerActions.toggleDrawer())}>
+        <Ionicons name="md-menu" style={{color: 'grey', marginLeft:7, fontSize: 30, height: 24}}/>
+      </TouchableOpacity>
+    </View>
+  );
+
 const FullStack=({navigation})=> {
   return (
   <Stack.Navigator>
-      <Stack.Screen  screenOptions={{
-        headerShown: false
-      }} name="Athu" component={LogSignParent} 
+      <Stack.Screen  name="Athu" component={LogSignParent} 
       options={{ title: 'Registration' }}
       />
       <Stack.Screen name="Home" children={DrawerComp} 
           options={({ navigation }) => ({ 
-            headerLeft: () => (
-                  <Button
-                    onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}
-                    title="Info"
-                    color="red"
-                  />
-                ),
+            headerLeft: () => <MenuButton navigation={navigation} />
           })}
       />  
+    
   </Stack.Navigator>
   )
+}
+
+const BottomTap=({navigation})=>{
+return (
+  <BottomTaps.Navigator style={{marginTop: 300}}>
+    <BottomTaps.Screen name="profile" component={Profile}/>
+  </BottomTaps.Navigator>
+)
 }
 
 const DrawerComp=(props)=>{
   return(
   <Drawer.Navigator>
-    <Drawer.Screen name='profile' component={Profile}/>
+    <Drawer.Screen name='profile' component={BottomTap}/>
     <Drawer.Screen name='setting' component={Setting}/>
-    <Drawer.Screen name="logout" component={LogOut}
-    options={
-      <Button onPress={() => console.log(props)   }   />
-    }
-    />
+    <Drawer.Screen name="logout" component={LogOut} />
   </Drawer.Navigator>
   )
 }
