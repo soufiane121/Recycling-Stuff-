@@ -51,7 +51,6 @@ const handlLogIn=()=>{
     })
   .then(resp=> resp.json())
   .then(data=> {
-      console.log("data after log in", data.hasOwnProperty("errors"));
       if (!data.hasOwnProperty("errors")) {
         props.handleCurrentUser(data)
         props.handleCurrentUserId(data.user.id)
@@ -71,14 +70,13 @@ const handlLogIn=()=>{
 
 useEffect(()=>{
   fetchAutoLogin()
-  props.navigation.replace("Home")
-
 },[props.handleCurrentUserId])
+
 
 const fetchAutoLogin = async () => {
   try {
      value = await AsyncStorage.getItem('user_id');
-     console.log('value of localstorage', value);
+     console.log("local storage", value);
      
     if (value !== null) {
       fetch(`${URL}/autologin`,{
@@ -93,6 +91,7 @@ const fetchAutoLogin = async () => {
         props.handleCurrentUser(data)
         props.handleCurrentUserId(data.user.id)
       })
+    props.navigation.replace("Home")
     }
   } catch (error) {
     alert("dont know yet")
