@@ -1,8 +1,8 @@
 import React from 'react'
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import {Text, View, StyleSheet, Button} from 'react-native';
-import Profile from './Profile'
-import Setting from './Profile'
+import Profile from './Feed'
+import Setting from './Feed'
 
 
 const First=({navigation})=>{

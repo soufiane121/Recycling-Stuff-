@@ -13,10 +13,11 @@ import { Ionicons } from '@expo/vector-icons';
 
 import LogSignParent from './Auth/LogSignParent'
 import First from './Components/First'
-import Profile from './Components/Profile';
+import Feed from './Components/Feed';
 import Setting from './Components/Setting';
 import LogOut from './Auth/LogOut';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import ScrollImage from './Components/ScrollImages'
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator()
@@ -53,7 +54,6 @@ const FullStack=({navigation})=> {
             headerLeft: () => <MenuButton navigation={navigation} />
           })}
       />  
-    
   </Stack.Navigator>
   )
 }
@@ -61,7 +61,7 @@ const FullStack=({navigation})=> {
 const BottomTap=({navigation})=>{
 return (
   <BottomTaps.Navigator style={{marginTop: 300}}>
-    <BottomTaps.Screen name="profile" component={Profile}/>
+    <BottomTaps.Screen name="Feed" component={Feed}/>
   </BottomTaps.Navigator>
 )
 }

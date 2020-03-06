@@ -6,5 +6,6 @@ const defaultState ={
  currentUser: null,
  currentUserId: null,
  loginDisplay: false,
+ searchInput: null,
 }
 export default defaultState;
